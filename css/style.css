@@ -1,0 +1,100 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+header nav {
+    max-width: 1200px;
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header nav .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 180px;
+    justify-content: space-evenly;
+}
+
+header nav .logo h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+header nav .logo img {
+    width: 30px;
+    height: auto;
+}
+
+header nav .menu {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav .menu #menu-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header nav .menu #menu-bar button {
+    width: 100px;
+    height: 40px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    background-color: rgba(45, 45, 45, 0);
+    cursor: pointer;
+}
+
+header nav .menu #menu-bar #all {
+    font-weight: 600;
+}
+
+header nav .menu #menu-bar #all:hover {
+    background-color: rgb(85, 134, 21);
+}
+
+header nav .menu #menu-bar #machines {
+    width: 110px;
+}
+
+header nav .menu #menu-bar #machines:hover {
+    background-color: rgb(201, 102, 20);
+}
+
+header nav .menu #menu-bar #reagents:hover {
+    background-color: rgb(90, 16, 57);
+}
+
+header nav .menu #menu-bar #recipients:hover {
+    background-color: rgb(27, 128, 123);
+}
