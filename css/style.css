@@ -129,7 +129,6 @@ main .container {
 main .container #products {
     margin-top: 20px;
     width: 70%;
-    background-color: beige;
 }
 
 main .container #products #productsList {
@@ -142,15 +141,90 @@ main .container #products #productsList {
 }
 
 main .container #products #productsList li {
-    background-color: aliceblue;
+    border: 3px solid  rgba(46, 27, 156, 0);
     min-width: 240px;
     min-height: 350px;
     width: 240px;
-    height: 350px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: .1s;
+    overflow: hidden;
 }
 
-main .container #products #productsList li img {
-    width: 100px;
-    height: 100px;
+main .container #products #productsList li:hover {
+    border: 3px solid  rgb(46, 27, 156);
+}
+
+main .container #products #productsList li .images {
+    width: 100%;
     background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+}
+
+main .container #products #productsList li .images img {
+    width: auto;
+    height: 150px;
+    background-color: #fff;
+    object-fit: cover;
+}
+
+main .container #products #productsList li .product-type {
+    box-sizing: border-box;
+    width: 90px;
+    height: 25px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding-top: 6px;
+    margin-left: 5px;
+    color: #fff;
+    background-color: rgb(46, 27, 156);
+}
+
+main .container #products #productsList li h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: justify;
+    box-sizing: border-box;
+    padding: 0 5px;
+    line-height: 20px;
+}
+
+main .container #products #productsList li .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: justify;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+main .container #products #productsList li span {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+main .container #products #productsList li .addProducts {
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    height: 30px;
+    background-color: rgba(46, 27, 156, 0.305);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: .1s;
+}
+
+main .container #products #productsList li .addProducts:hover {
+    background-color: rgb(46, 27, 156);
+    color: rgb(255, 255, 255);
 }
