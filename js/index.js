@@ -204,6 +204,31 @@ function createCardsShoppingCart (searchId) {
         let liCart = document.querySelector('#_C'+searchId.id);
         liCart.remove()
 
+        console.log(cart);
+
+        cart = cart.filter(function(e) {
+            return e.id != searchId.id
+        })
+
+        let sum = 0;
+
+            for (let value = 0; value < cart.length; value++) {
+                let valueAdjustment = cart[value].value.substring(2);
+
+                let newValue = "";
+
+                for (let i = 0; i < valueAdjustment.length; i++) {
+                    if (valueAdjustment[i] !== '.') {
+                        newValue+=valueAdjustment[i];
+                    }
+                } 
+                sum+=parseFloat(newValue);
+            }
+            
+            total.innerHTML = `R$${sum}`
+
+        console.log(cart);
+
         amountValue--;
         amount.innerHTML = amountValue;
     })
