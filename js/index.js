@@ -211,3 +211,95 @@ function createCardsShoppingCart (searchId) {
     return li;
 }
 
+
+
+/*Adicionando funcionalidade aos botões do menu*/
+
+let allButton = document.querySelector('#all');
+
+allButton.addEventListener('click', function() {
+    ulProductsList.innerHTML = '';
+
+    let addCards = addCardsOnProductsList (arrProductsList);
+
+    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
+
+    for (let buttons = 0; buttons < buttonsAdicionar.length; buttons++) {
+        let button = buttonsAdicionar[buttons];
+    
+        button.addEventListener('click', function(e) {
+            let idButton = e.target.id;
+            let id = parseInt(idButton.substring(2));
+    
+            if(verifyProduct(id) === false) {
+                amountValue++
+    
+                let searchId = searchProduct(id);
+    
+                cart.push(searchId);
+    
+                let productCard = createCardsShoppingCart (searchId);
+    
+                ulShoppingCart.appendChild(productCard);
+    
+                amount = document.querySelector('#qt');
+                amount.innerHTML = amountValue;
+    
+                let sum = 0;
+    
+                for (let value = 0; value < cart.length; value++) {
+                    let valueAdjustment = cart[value].value.substring(2);
+    
+                    let newValue = "";
+    
+                    for (let i = 0; i < valueAdjustment.length; i++) {
+                        if (valueAdjustment[i] !== '.') {
+                            newValue+=valueAdjustment[i];
+                        }
+                    } 
+                    sum+=parseFloat(newValue);
+                }
+                
+                total.innerHTML = `R$${sum}`
+            }
+        })
+    }
+})
+
+let equipment = [];
+let reagent = [];
+let recipient = [];
+
+for (let products = 0; products < arrProductsList.length; products++) {
+    if (arrProductsList[products].type === 'Equipamentos') {
+        equipment.push(arrProductsList[products]);
+    } else if (arrProductsList[products].type === 'Reagentes') {
+        reagent.push(arrProductsList[products]);
+    } else if (arrProductsList[products].type === 'Recipientes') {
+        recipient.push(arrProductsList[products]);
+    }
+}
+
+let machinesButton = document.querySelector('#machines');
+
+machinesButton.addEventListener('click', function() {
+    ulProductsList.innerHTML = '';
+
+    let addCards = addCardsOnProductsList (equipment);
+})
+
+let reagentsButton = document.querySelector('#reagents');
+
+reagentsButton.addEventListener('click', function() {
+    ulProductsList.innerHTML = '';
+
+    let addCards = addCardsOnProductsList (reagent);
+})
+
+let recipientsButton = document.querySelector('#recipients');
+
+recipientsButton.addEventListener('click', function() {
+    ulProductsList.innerHTML = '';
+
+    let addCards = addCardsOnProductsList (recipient);
+})
