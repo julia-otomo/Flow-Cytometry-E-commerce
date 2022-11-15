@@ -265,7 +265,7 @@ machinesButton.addEventListener('click', function() {
     let addCards = addCardsOnProductsList (equipment);
 
     let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
-    
+
     let addButtons = addButtonFuncionality (buttonsAdicionar, equipment);
 })
 
@@ -295,9 +295,11 @@ searchBar.addEventListener('input', function(e){
     newArray = [];
 
     for (let i = 0; i < arrProductsList.length; i++) {
-        if (arrProductsList[i].name.includes(element) === true || arrProductsList[i].type.includes(element)) {
+        let nameLowerCase = arrProductsList[i].name.toLowerCase()
+        let typeLowerCase = arrProductsList[i].type.toLowerCase()
+        if (nameLowerCase.includes(element.toLowerCase()) === true || typeLowerCase.includes(element.toLowerCase())) {
             newArray.push(arrProductsList[i])
-        }
+        } 
     }
     ulProductsList.innerHTML = '';
     addCardsOnProductsList(newArray);
