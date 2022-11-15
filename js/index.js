@@ -15,9 +15,9 @@ function createObjects (id, img, type, name, description, value) {
 
 let arrProductsList = [];
 
-arrProductsList.push(createObjects(1, "./assets/equipamentos/A3-Banner-Image.png", "Equipamentos", "Citômetro de Fluxo BD FACSymphony A3 Cell Analyzer", "Um citômetro de fluxo personalizável que fornece análise de alto parâmetro em um espaço menor", "R$600.000"));
+arrProductsList.push(createObjects(1, "./assets/equipamentos/A3-Banner-Image.png", "Equipamentos", "Citômetro de fluxo BD FACSymphony A3 Cell Analyzer", "Um citômetro de fluxo personalizável que fornece análise de alto parâmetro em um espaço menor", "R$600.000"));
 
-arrProductsList.push(createObjects(2, "./assets/equipamentos/BD-FACSCanto-II.png", "Equipamentos", "Citômetro de Fluxo BD FACSCanto Clinical Flow Cytometry System", "Qualidade e desempenho comprovados nos quais você pode confiar", "R$670.000"));
+arrProductsList.push(createObjects(2, "./assets/equipamentos/BD-FACSCanto-II.png", "Equipamentos", "Citômetro de fluxo BD FACSCanto Clinical Flow Cytometry System", "Qualidade e desempenho comprovados nos quais você pode confiar", "R$670.000"));
 
 arrProductsList.push(createObjects(3, "./assets/reagentes/340499_01.png", "Reagentes", "Multitest CD3 FITC/ CD8 PE/ CD45 PerCP/ CD4 APC reagent", "Kit contendo anticorpos anti-CD3, anti-CD45, anti-CD8, anti-CD4", "R$1000"));
 
@@ -51,9 +51,9 @@ arrProductsList.push(createObjects(17, "./assets/recipientes/proveta.jpg", "Reci
 
 arrProductsList.push(createObjects(18, "./assets/recipientes/tubosEDTA.png", "Recipientes", "EDTA tubes", "ubos de coleta de sangue à vácuo contendo anticoagulante EDTA", "R$500"));
 
-function addCardsOnProductsList (arrProductsList) {
+function addCardsOnProductsList (arr) {
     let count = 0;
-    for (let i = 0; i < arrProductsList.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         count++
         let li = document.createElement('li');
         li.setAttribute('id', `_P${count}`);
@@ -62,7 +62,7 @@ function addCardsOnProductsList (arrProductsList) {
         divImages.classList.add('images');
 
         let img = document.createElement('img');
-        img.src = arrProductsList[i].img;
+        img.src = arr[i].img;
 
         divImages.appendChild(img);
 
@@ -70,20 +70,20 @@ function addCardsOnProductsList (arrProductsList) {
 
         let pType = document.createElement('p');
         pType.classList.add('product-type');
-        pType.innerHTML = arrProductsList[i].type;
+        pType.innerHTML = arr[i].type;
         li.appendChild(pType);
 
         let productsName = document.createElement('h2');
-        productsName.innerHTML = arrProductsList[i].name;
+        productsName.innerHTML = arr[i].name;
         li.appendChild(productsName);
 
         let pDescription = document.createElement('p');
         pDescription.classList.add('description');
-        pDescription.innerHTML = arrProductsList[i].description;
+        pDescription.innerHTML = arr[i].description;
         li.appendChild(pDescription);
 
         let span = document.createElement('span');
-        span.innerHTML = arrProductsList[i].value;
+        span.innerHTML = arr[i].value;
         li.appendChild(span);
 
         let buttonAddProducts = document.createElement('button');
@@ -113,46 +113,36 @@ let total = document.querySelector('#value');
 
 let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
 
-for (let buttons = 0; buttons < buttonsAdicionar.length; buttons++) {
-    let button = buttonsAdicionar[buttons];
+function addButtonFuncionality (buttonsAdicionar, arr) {
+    for (let buttons = 0; buttons < buttonsAdicionar.length; buttons++) {
+        let button = buttonsAdicionar[buttons];
 
-    button.addEventListener('click', function(e) {
-        let idButton = e.target.id;
-        let id = parseInt(idButton.substring(2));
+        button.addEventListener('click', function(e) {
+            let idButton = e.target.id;
+            let id = parseInt(idButton.substring(2));
 
-        if(verifyProduct(id) === false) {
-            amountValue++
+            if(verifyProduct(id) === false) {
+                amountValue++
 
-            let searchId = searchProduct(id);
+                let searchId = searchProduct(id, arr);
 
-            cart.push(searchId);
+                cart.push(searchId);
 
-            let productCard = createCardsShoppingCart (searchId);
+                let productCard = createCardsShoppingCart (searchId);
 
-            ulShoppingCart.appendChild(productCard);
+                ulShoppingCart.appendChild(productCard);
 
-            amount = document.querySelector('#qt');
-            amount.innerHTML = amountValue;
+                amount = document.querySelector('#qt');
+                amount.innerHTML = amountValue;
 
-            let sum = 0;
-
-            for (let value = 0; value < cart.length; value++) {
-                let valueAdjustment = cart[value].value.substring(2);
-
-                let newValue = "";
-
-                for (let i = 0; i < valueAdjustment.length; i++) {
-                    if (valueAdjustment[i] !== '.') {
-                        newValue+=valueAdjustment[i];
-                    }
-                } 
-                sum+=parseFloat(newValue);
+                calculateTotal (cart);
             }
-            
-            total.innerHTML = `R$${sum}`
-        }
-    })
+        })
+    } 
 }
+
+addButtonFuncionality (buttonsAdicionar, arrProductsList);
+
 
 function verifyProduct (id) {
     let product = document.querySelector('#_C'+id);
@@ -163,9 +153,9 @@ function verifyProduct (id) {
     }
 }
 
-function searchProduct (id){
-    for(let i = 0; i< arrProductsList.length ; i++){
-        let product = arrProductsList[i];
+function searchProduct (id, arr){
+    for(let i = 0; i < arr.length ; i++){
+        let product = arr[i];
         if(product.id == id){
             return product;
         }
@@ -210,24 +200,7 @@ function createCardsShoppingCart (searchId) {
             return e.id != searchId.id
         })
 
-        let sum = 0;
-
-            for (let value = 0; value < cart.length; value++) {
-                let valueAdjustment = cart[value].value.substring(2);
-
-                let newValue = "";
-
-                for (let i = 0; i < valueAdjustment.length; i++) {
-                    if (valueAdjustment[i] !== '.') {
-                        newValue+=valueAdjustment[i];
-                    }
-                } 
-                sum+=parseFloat(newValue);
-            }
-            
-            total.innerHTML = `R$${sum}`
-
-        console.log(cart);
+        calculateTotal (cart);
 
         amountValue--;
         amount.innerHTML = amountValue;
@@ -236,7 +209,25 @@ function createCardsShoppingCart (searchId) {
     return li;
 }
 
+function calculateTotal (arr) {
+    let sum = 0;
 
+    for (let value = 0; value < arr.length; value++) {
+        let valueAdjustment = arr[value].value.substring(2);
+
+        let newValue = "";
+
+            for (let i = 0; i < valueAdjustment.length; i++)
+            {
+                if (valueAdjustment[i] !== '.') {
+                newValue+=valueAdjustment[i];
+                }
+             } 
+            sum+=parseFloat(newValue);
+    }
+            
+    total.innerHTML = `R$${sum.toLocaleString()}`
+}
 
 /*Adicionando funcionalidade aos botões do menu*/
 
@@ -249,46 +240,7 @@ allButton.addEventListener('click', function() {
 
     let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
 
-    for (let buttons = 0; buttons < buttonsAdicionar.length; buttons++) {
-        let button = buttonsAdicionar[buttons];
-    
-        button.addEventListener('click', function(e) {
-            let idButton = e.target.id;
-            let id = parseInt(idButton.substring(2));
-    
-            if(verifyProduct(id) === false) {
-                amountValue++
-    
-                let searchId = searchProduct(id);
-    
-                cart.push(searchId);
-    
-                let productCard = createCardsShoppingCart (searchId);
-    
-                ulShoppingCart.appendChild(productCard);
-    
-                amount = document.querySelector('#qt');
-                amount.innerHTML = amountValue;
-    
-                let sum = 0;
-    
-                for (let value = 0; value < cart.length; value++) {
-                    let valueAdjustment = cart[value].value.substring(2);
-    
-                    let newValue = "";
-    
-                    for (let i = 0; i < valueAdjustment.length; i++) {
-                        if (valueAdjustment[i] !== '.') {
-                            newValue+=valueAdjustment[i];
-                        }
-                    } 
-                    sum+=parseFloat(newValue);
-                }
-                
-                total.innerHTML = `R$${sum}`
-            }
-        })
-    }
+    let addButtons = addButtonFuncionality (buttonsAdicionar, arrProductsList)
 })
 
 let equipment = [];
@@ -311,6 +263,10 @@ machinesButton.addEventListener('click', function() {
     ulProductsList.innerHTML = '';
 
     let addCards = addCardsOnProductsList (equipment);
+
+    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
+    
+    let addButtons = addButtonFuncionality (buttonsAdicionar, equipment);
 })
 
 let reagentsButton = document.querySelector('#reagents');
@@ -327,4 +283,22 @@ recipientsButton.addEventListener('click', function() {
     ulProductsList.innerHTML = '';
 
     let addCards = addCardsOnProductsList (recipient);
+})
+
+
+/*Adicionando funcionalidade no input*/
+
+let searchBar = document.querySelector('#search-bar');
+
+searchBar.addEventListener('input', function(e){
+    let element = e.target.value;
+    newArray = [];
+
+    for (let i = 0; i < arrProductsList.length; i++) {
+        if (arrProductsList[i].name.includes(element) === true || arrProductsList[i].type.includes(element)) {
+            newArray.push(arrProductsList[i])
+        }
+    }
+    ulProductsList.innerHTML = '';
+    addCardsOnProductsList(newArray);
 })
