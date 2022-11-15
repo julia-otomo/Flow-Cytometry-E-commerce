@@ -134,11 +134,12 @@ main .container #products {
 }
 
 main .container #products #productsList {
-    height: 100%;
+    max-height: 770px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    overflow-y: auto;
 }
 
 main .container #products #productsList li {
