@@ -261,6 +261,10 @@ machinesButton.addEventListener('click', function() {
     ulProductsList.innerHTML = '';
 
     let addCards = addCardsOnProductsList (equipment);
+
+    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
+
+    addButtonFuncionality (buttonsAdicionar, equipment);
 })
 
 let reagentsButton = document.querySelector('#reagents');
@@ -269,6 +273,10 @@ reagentsButton.addEventListener('click', function() {
     ulProductsList.innerHTML = '';
 
     let addCards = addCardsOnProductsList (reagent);
+
+    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
+
+    addButtonFuncionality (buttonsAdicionar, reagent);
 })
 
 let recipientsButton = document.querySelector('#recipients');
@@ -277,6 +285,10 @@ recipientsButton.addEventListener('click', function() {
     ulProductsList.innerHTML = '';
 
     let addCards = addCardsOnProductsList (recipient);
+
+    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
+
+    addButtonFuncionality (buttonsAdicionar, recipient);
 })
 
 
@@ -297,4 +309,8 @@ searchBar.addEventListener('input', function(e){
     }
     ulProductsList.innerHTML = '';
     addCardsOnProductsList(newArray);
+
+    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
+
+    addButtonFuncionality (buttonsAdicionar, newArray);
 })
