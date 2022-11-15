@@ -194,8 +194,6 @@ function createCardsShoppingCart (searchId) {
         let liCart = document.querySelector('#_C'+searchId.id);
         liCart.remove()
 
-        console.log(cart);
-
         cart = cart.filter(function(e) {
             return e.id != searchId.id
         })
@@ -240,7 +238,7 @@ allButton.addEventListener('click', function() {
 
     let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
 
-    let addButtons = addButtonFuncionality (buttonsAdicionar, arrProductsList)
+    let addButtons = addButtonFuncionality (buttonsAdicionar, arrProductsList);
 })
 
 let equipment = [];
@@ -263,10 +261,6 @@ machinesButton.addEventListener('click', function() {
     ulProductsList.innerHTML = '';
 
     let addCards = addCardsOnProductsList (equipment);
-
-    let buttonsAdicionar = document.querySelectorAll('.addProducts'); 
-
-    let addButtons = addButtonFuncionality (buttonsAdicionar, equipment);
 })
 
 let reagentsButton = document.querySelector('#reagents');
